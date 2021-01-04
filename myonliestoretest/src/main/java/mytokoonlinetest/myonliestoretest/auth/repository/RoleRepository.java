@@ -1,4 +1,7 @@
 package mytokoonlinetest.myonliestoretest.auth.repository;
 
-public interface RoleRepository {
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RoleRepository  {
 }
