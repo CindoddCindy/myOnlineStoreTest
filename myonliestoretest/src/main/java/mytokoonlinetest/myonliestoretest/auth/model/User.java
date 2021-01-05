@@ -1,5 +1,6 @@
 package mytokoonlinetest.myonliestoretest.auth.model;
 
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,102 +23,96 @@ import org.hibernate.annotations.NaturalId;
 @Entity
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-                "username"
+                "name"
         }),
         @UniqueConstraint(columnNames = {
                 "email"
         })
 })
-
 public class User {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @NotBlank
-        @Size(min=3, max = 50)
-        private String name;
+    @NotBlank
+    @Size(min=3, max = 50)
+    private String name;
 
+    @NaturalId
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
 
-        @NaturalId
-        @NotBlank
-        @Size(max = 50)
-        @Email
-        private String email;
+    @NotBlank
+    @Size(min=1, max=20)
+    private String phone;
 
-        @NotBlank
-        @Size(min=3, max = 50)
-        private String phone;
+    @NotBlank
+    @Size(min=6, max = 100)
+    private String password;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
-        @NotBlank
-        @Size(min=6, max = 100)
-        private String password;
+    public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(min = 1, max = 20) String phone, @NotBlank @Size(min = 6, max = 100) String password) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
 
-        @ManyToMany(fetch = FetchType.LAZY)
-        @JoinTable(name = "user_roles",
-                joinColumns = @JoinColumn(name = "user_id"),
-                inverseJoinColumns = @JoinColumn(name = "role_id"))
-        private Set<Role> roles = new HashSet<>();
+    public User() {
+    }
 
-        public User() {}
+    public Long getId() {
+        return id;
+    }
 
-        public User(String name,  String email, String phone, String password) {
-                this.name = name;
-                this.email = email;
-                this.phone = phone;
-                this.password = password;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public Long getId() {
-                return id;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public void setId(Long id) {
-                this.id = id;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getEmail() {
+        return email;
+    }
 
-        public String getName() {
-                return name;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        public void setName(String name) {
-                this.name = name;
-        }
+    public String getPhone() {
+        return phone;
+    }
 
-        public String getEmail() {
-                return email;
-        }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-        public void setEmail(String email) {
-                this.email = email;
-        }
+    public String getPassword() {
+        return password;
+    }
 
-        public String getPhone() {
-                return phone;
-        }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-        public void setPhone(String phone) {
-                this.phone = phone;
-        }
+    public Set<Role> getRoles() {
+        return roles;
+    }
 
-        public String getPassword() {
-                return password;
-        }
-
-        public void setPassword(String password) {
-                this.password = password;
-        }
-
-        public Set<Role> getRoles() {
-                return roles;
-        }
-
-        public void setRoles(Set<Role> roles) {
-                this.roles = roles;
-        }
-
-
-
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }

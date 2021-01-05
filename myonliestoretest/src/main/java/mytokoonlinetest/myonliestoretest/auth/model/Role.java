@@ -46,4 +46,5 @@ public class Role {
     public void setName(RoleAccess name) {
         this.name = name;
     }
+
 }
