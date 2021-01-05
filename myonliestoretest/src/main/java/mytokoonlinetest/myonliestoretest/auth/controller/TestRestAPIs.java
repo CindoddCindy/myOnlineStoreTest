@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestRestAPIs {
-    @GetMapping("/api/test/user")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping("/api/test/seller")
+    @PreAuthorize("hasRole('USER') or hasRole('SELLER')")
     public String userAccess() {
-        return ">>> User Contents!";
+        return ">>> Seller Contents!";
     }
 
-    @GetMapping("/api/test/pm")
-    @PreAuthorize("hasRole('PM') or hasRole('ADMIN')")
+    @GetMapping("/api/test/buyer")
+    @PreAuthorize("hasRole('USER') or hasRole('BUYER')")
     public String projectManagementAccess() {
-        return ">>> Board Management Project";
+        return ">>> Buyer Content";
     }
 
     @GetMapping("/api/test/admin")
