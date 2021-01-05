@@ -10,18 +10,18 @@ public class TestRestAPIs {
     @GetMapping("/api/test/seller")
     @PreAuthorize("hasRole('SELLER') or hasRole('ADMIN')")
     public String sellerAccess() {
-        return ">>> Seller Contents!";
+        return ">>>  Access Seller Contents!";
     }
 
     @GetMapping("/api/test/buyer")
     @PreAuthorize("hasRole('BUYER') or hasRole('ADMIN')")
     public String buyerAccess() {
-        return ">>> Buyer Content";
+        return ">>> Access Buyer Content";
     }
 
     @GetMapping("/api/test/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public String adminAccess() {
-        return ">>> Admin Contents";
+        return ">>> Access Admin Contents";
     }
 }
