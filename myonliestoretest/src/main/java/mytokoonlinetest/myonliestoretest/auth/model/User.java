@@ -18,6 +18,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import mytokoonlinetest.myonliestoretest.main.model.AuditModel;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
@@ -29,7 +30,7 @@ import org.hibernate.annotations.NaturalId;
                 "email"
         })
 })
-public class User {
+public class User extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
