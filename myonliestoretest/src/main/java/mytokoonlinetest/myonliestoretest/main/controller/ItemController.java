@@ -38,7 +38,7 @@ public class ItemController {
         }).orElseThrow(() -> new ResourceNotFoundException("UserId " + userId + " not found"));
     }
 
-    @PutMapping("/user/{userId}/item/{itemId}")
+    @PutMapping("/api/auth/user/{userId}/item/{itemId}")
     public Item updateItem(@PathVariable (value = "userId") Long userId,
                                  @PathVariable (value = "itemId") Long itemId,
                                  @Valid @RequestBody Item itemRequest) {
@@ -52,7 +52,7 @@ public class ItemController {
         }).orElseThrow(() -> new ResourceNotFoundException("ItemId " + itemId + "not found"));
     }
 
-    @DeleteMapping("/user/{userId}/item/{itemId}")
+    @DeleteMapping("/api/auth/user/{userId}/item/{itemId}")
     public ResponseEntity<?> deleteItem(@PathVariable (value = "userId") Long userId,
                                            @PathVariable (value = "itemId") Long itemId) {
         return itemRepository.findByIdAndUserId(itemId, userId).map(item -> {

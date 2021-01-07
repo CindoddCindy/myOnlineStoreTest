@@ -17,17 +17,17 @@ public class UserController {
     @Autowired
     private UserDuaRepository userDuaRepository;
 
-    @GetMapping("/user")
+    @GetMapping("/api/auth/user")
     public Page<User> getAllUser(Pageable pageable) {
         return userDuaRepository.findAll(pageable);
     }
 
-    @PostMapping("/user")
+    @PostMapping("/api/auth/user")
     public User createUser(@Valid @RequestBody User user) {
         return userDuaRepository.save(user);
     }
 
-    @PutMapping("/user/{userId}")
+    @PutMapping("/api/auth/user/{userId}")
     public User updateUser(@PathVariable Long userId, @Valid @RequestBody User userRequest) {
         return userDuaRepository.findById(userId).map(user -> {
             user.setName(userRequest.getName());
@@ -39,7 +39,7 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/users/{userId}")
+    @DeleteMapping("/api/auth/users/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
         return userDuaRepository.findById(userId).map(user -> {
             userDuaRepository.delete(user);
