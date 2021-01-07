@@ -23,13 +23,13 @@ public class ItemController {
     @Autowired
     private UserDuaRepository userDuaRepository;
 
-    @GetMapping("/user/{userId}/items")
+    @GetMapping("/api/auth/user/{userId}/items")
     public Page<Item> getAllItemsByUserId(@PathVariable (value = "userId") Long userId,
                                              Pageable pageable) {
         return itemRepository.findByUserId(userId, pageable);
     }
 
-    @PostMapping("/user/{userId}/item")
+    @PostMapping("/api/auth/user/{userId}/item")
     public Item createItems(@PathVariable (value = "userId") Long userId,
                               @Valid @RequestBody Item item) {
         return userDuaRepository.findById(userId).map(user ->  {
