@@ -19,6 +19,12 @@ public class Item extends AuditModel {
     private Long id;
 
     @NotNull
+    private String sellername;
+
+    @NotNull
+    private String sellerphone;
+
+    @NotNull
     private String itemname;
 
     @NotNull
