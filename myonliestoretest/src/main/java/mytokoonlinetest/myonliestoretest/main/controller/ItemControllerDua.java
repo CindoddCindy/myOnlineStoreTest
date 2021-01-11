@@ -17,17 +17,17 @@ public class ItemControllerDua {
     @Autowired
     private ItemRepositoryDua itemRepositoryDua;
 
-    @GetMapping("/item")
+    @GetMapping("/api/auth/item")
     public Page<Item> getAllItems(Pageable pageable) {
         return itemRepositoryDua.findAll(pageable);
     }
 
-    @PostMapping("/item")
+    @PostMapping("/api/auth/item")
     public Item createItem(@Valid @RequestBody Item item) {
         return itemRepositoryDua.save(item);
     }
 
-    @PutMapping("/item/{itemId}")
+    @PutMapping("/api/auth/item/{itemId}")
     public Item updateItem(@PathVariable Long itemId, @Valid @RequestBody Item itemRequest) {
         return itemRepositoryDua.findById(itemId).map(item -> {
             item.setItemname(itemRequest.getItemname());
@@ -42,7 +42,7 @@ public class ItemControllerDua {
     }
 
 
-    @DeleteMapping("/item/{itemId}")
+    @DeleteMapping("/api/auth/item/{itemId}")
     public ResponseEntity<?> deleteItem(@PathVariable Long itemId) {
         return itemRepositoryDua.findById(itemId).map(item -> {
             itemRepositoryDua.delete(item);

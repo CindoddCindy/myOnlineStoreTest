@@ -20,13 +20,13 @@ public class ItemsBuyController {
     @Autowired
     private ItemRepositoryDua itemRepositoryDua;
 
-    @GetMapping("/item/{itemId}/buyitem")
+    @GetMapping("/api/auth/item/{itemId}/buyitem")
     public Page<BuyItem> getAllBuyByItemId(@PathVariable (value = "itemId") Long itemId,
                                                 Pageable pageable) {
         return itemBuyRepository.findByItemId(itemId, pageable);
     }
 
-    @PostMapping("/item/{itemId}/buyitem")
+    @PostMapping("/api/auth/item/{itemId}/buyitem")
     public BuyItem createBuy(@PathVariable (value = "itemId") Long itemId,
                                  @Valid @RequestBody BuyItem buyItem) {
         return itemRepositoryDua.findById(itemId).map(item -> {
@@ -35,7 +35,7 @@ public class ItemsBuyController {
         }).orElseThrow(() -> new ResourceNotFoundException("ItemId " + itemId + " not found"));
     }
 
-    @PutMapping("/item/{itemId}/buyitem/{buyitemId}")
+    @PutMapping("/api/auth/item/{itemId}/buyitem/{buyitemId}")
     public BuyItem updateBuyItems(@PathVariable (value = "itemId") Long itemId,
                                  @PathVariable (value = "buyitemId") Long buyitemId,
                                  @Valid @RequestBody BuyItem buyItemRequest) {
@@ -49,7 +49,7 @@ public class ItemsBuyController {
         }).orElseThrow(() -> new ResourceNotFoundException("BuyItemId " + buyitemId + "not found"));
     }
 
-    @DeleteMapping("/item/{itemId}/buyitem/{buyitemId}")
+    @DeleteMapping("/api/auth/item/{itemId}/buyitem/{buyitemId}")
     public ResponseEntity<?> deleteBuyItem(@PathVariable (value = "itemId") Long itemId,
                                            @PathVariable (value = "buyitemId") Long buyitemId) {
         return itemBuyRepository.findByIdAndItemId(buyitemId, itemId).map(buyItem -> {
