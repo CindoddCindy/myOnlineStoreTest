@@ -39,31 +39,30 @@ public class ConfirmBuyItemController {
         }).orElseThrow(() -> new ResourceNotFoundException("buyItemId " + buyItemId + " not found"));
     }
 
-    /*
-    @PutMapping("/api/auth/item/{itemId}/buyitem/{buyitemId}")
-    public BuyItem updateBuyItem(@PathVariable (value = "itemId") Long itemId,
-                                 @PathVariable (value = "buyitemId") Long buyitemId,
-                                 @Valid @RequestBody BuyItem buyItemRequest) {
-        if(!itemRepository.existsById(itemId)) {
-            throw new ResourceNotFoundException("ItemId " + itemId + " not found");
+
+    @PutMapping("/api/auth/buyitem/{buyItemId}/confirmbuyitem/{confirmBuyItemId}")
+    public ConfirmBuyItem updateConfirmBuyItem(@PathVariable (value = "buyItemId") Long buyItemId,
+                                 @PathVariable (value = "confirmBuyItemId") Long confirmBuyItemId,
+                                 @Valid @RequestBody ConfirmBuyItem confirmBuyItemRequest) {
+        if(!buyItemRepository.existsById(buyItemId)) {
+            throw new ResourceNotFoundException("BuyItemId " + buyItemId + " not found");
         }
 
-        return buyItemRepository.findById(buyitemId).map(buyItem -> {
-            buyItem.setBuyername(buyItemRequest.getBuyername());
-            buyItem.setBuyerphone(buyItemRequest.getBuyerphone());
-            buyItem.setBuyeraddress(buyItemRequest.getBuyeraddress());
-            return buyItemRepository.save(buyItem);
-        }).orElseThrow(() -> new ResourceNotFoundException("BuyItemId " + buyitemId + "not found"));
+        return confirmByItemRepository.findById(confirmBuyItemId).map(confirmBuyItem -> {
+            confirmBuyItem.setConf(confirmBuyItemRequest.getConf());
+            confirmBuyItem.setNote(confirmBuyItemRequest.getNote());
+            return confirmByItemRepository.save(confirmBuyItem);
+        }).orElseThrow(() -> new ResourceNotFoundException("BuyItemId " + confirmBuyItemId + "not found"));
     }
 
-    @DeleteMapping("/api/auth/item/{itemId}/buyitem/{buyitemId}")
-    public ResponseEntity<?> deleteBuy(@PathVariable (value = "itemId") Long itemId,
-                                       @PathVariable (value = "buyitemId") Long buyitemId) {
-        return buyItemRepository.findByIdAndItemId(buyitemId, itemId).map(buyItem -> {
-            buyItemRepository.delete(buyItem);
+    @DeleteMapping("/api/auth/buyitem/{buyItemId}/confirmbuyitem/{confirmBuyItemId}")
+    public ResponseEntity<?> deleteConfirmBuy(@PathVariable (value = "buyItemId") Long buyItemId,
+                                       @PathVariable (value = "confirmBuyItemId") Long confirmBuyItemId) {
+        return confirmByItemRepository.findByIdAndBuyItemId(confirmBuyItemId, buyItemId).map(confirmBuyItem -> {
+            confirmByItemRepository.delete(confirmBuyItem);
             return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException("Buy Item not found with id " + buyitemId + " and postId " + itemId));
+        }).orElseThrow(() -> new ResourceNotFoundException("Buy Item not found with id " + confirmBuyItemId + " and postId " + buyItemId));
     }
 
-     */
+
 }
