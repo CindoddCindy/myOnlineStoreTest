@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface SellerConfrimRepository  extends JpaRepository<SellerConfrim, Long> {
-    Page<SellerConfrim> findByBuyItemtId(Long buyId, Pageable pageable);
-    Optional<SellerConfrim> findByIdAndBuyId(Long id, Long buyId);
+    Page<SellerConfrim> findByBuyItemtId(Long buyitemId, Pageable pageable);
+    Optional<SellerConfrim> findBySellerConfirmAndBuyId(Long id, Long buyitemId);
 }
