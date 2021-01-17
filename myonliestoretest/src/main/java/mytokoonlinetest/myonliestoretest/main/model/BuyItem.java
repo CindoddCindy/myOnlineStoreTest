@@ -26,6 +26,7 @@ public class BuyItem extends AuditModel {
 
     @NotNull String buyeraddress;
 
+
     @NotNull
     @Column(unique = true)
     private String itemname;
