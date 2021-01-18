@@ -1,5 +1,6 @@
 package mytokoonlinetest.myonliestoretest.main.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -7,33 +8,32 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "payment")
-public class Payment extends AuditModel{
+@Table(name = "paymentitem")
+public class PaymentItem extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String payconf;
+    private String confpay;
 
     @NotNull
-    private String paynote;
-
+    private String notepay;
 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "confirm_id", nullable = false)
+    @JoinColumn(name = "confirm_buy_item_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private ConfirmBuyItem confirmBuyItem;
 
-    public Payment(@NotNull String payconf, @NotNull String paynote) {
-        this.payconf = payconf;
-        this.paynote = paynote;
+    public PaymentItem() {
     }
 
-    public Payment() {
+    public PaymentItem(@NotNull String confpay, @NotNull String notepay) {
+        this.confpay = confpay;
+        this.notepay = notepay;
     }
 
     public Long getId() {
@@ -44,20 +44,20 @@ public class Payment extends AuditModel{
         this.id = id;
     }
 
-    public String getPayconf() {
-        return payconf;
+    public String getConfpay() {
+        return confpay;
     }
 
-    public void setPayconf(String payconf) {
-        this.payconf = payconf;
+    public void setConfpay(String confpay) {
+        this.confpay = confpay;
     }
 
-    public String getPaynote() {
-        return paynote;
+    public String getNotepay() {
+        return notepay;
     }
 
-    public void setPaynote(String paynote) {
-        this.paynote = paynote;
+    public void setNotepay(String notepay) {
+        this.notepay = notepay;
     }
 
     public ConfirmBuyItem getConfirmBuyItem() {
