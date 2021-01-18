@@ -23,7 +23,7 @@ public class Payment extends AuditModel{
 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "conf_id", nullable = false)
+    @JoinColumn(name = "confirm_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private ConfirmBuyItem confirmBuyItem;
