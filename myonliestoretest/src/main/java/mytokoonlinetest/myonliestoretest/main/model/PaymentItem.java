@@ -22,6 +22,8 @@ public class PaymentItem extends AuditModel{
     private String notepay;
 
 
+
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "confirm_buy_item_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
