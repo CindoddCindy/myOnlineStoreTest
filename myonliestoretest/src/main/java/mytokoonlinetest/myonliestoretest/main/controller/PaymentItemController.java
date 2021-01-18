@@ -37,29 +37,30 @@ public class PaymentItemController {
         }).orElseThrow(() -> new ResourceNotFoundException("PostId " + confirmBuyItemId + " not found"));
     }
 
-    /*
-    @PutMapping("/posts/{postId}/comments/{commentId}")
-    public Comment updateComment(@PathVariable (value = "postId") Long postId,
-                                 @PathVariable (value = "commentId") Long commentId,
-                                 @Valid @RequestBody Comment commentRequest) {
-        if(!postRepository.existsById(postId)) {
-            throw new ResourceNotFoundException("PostId " + postId + " not found");
+
+    @PutMapping("/confirmbuyitem/{confirmBuyItemId}/paymentitem/{paymentItemId}")
+    public PaymentItem updatePaymentItem(@PathVariable (value = "confirmBuyItemId") Long confirmBuyItemId,
+                                 @PathVariable (value = "paymentItemId") Long paymentItemId,
+                                 @Valid @RequestBody PaymentItem paymentItemRequest) {
+        if(!confirmByItemRepository.existsById(confirmBuyItemId)) {
+            throw new ResourceNotFoundException("Confirm Buy Item Id " + confirmBuyItemId + " not found");
         }
 
-        return commentRepository.findById(commentId).map(comment -> {
-            comment.setText(commentRequest.getText());
-            return commentRepository.save(comment);
-        }).orElseThrow(() -> new ResourceNotFoundException("CommentId " + commentId + "not found"));
+        return paymentItemRepository.findById(paymentItemId).map(paymentItem -> {
+            paymentItem.setConfpay(paymentItemRequest.getConfpay());
+            paymentItem.setNotepay(paymentItemRequest.getNotepay());
+            return paymentItemRepository.save(paymentItem);
+        }).orElseThrow(() -> new ResourceNotFoundException("CommentId " + paymentItemId + "not found"));
     }
 
-    @DeleteMapping("/posts/{postId}/comments/{commentId}")
-    public ResponseEntity<?> deleteComment(@PathVariable (value = "postId") Long postId,
-                                           @PathVariable (value = "commentId") Long commentId) {
-        return commentRepository.findByIdAndPostId(commentId, postId).map(comment -> {
-            commentRepository.delete(comment);
+    @DeleteMapping("/confirmbuyitem/{confirmBuyItemId}/paymentitem/{paymentItemId}")
+    public ResponseEntity<?> deleteComment(@PathVariable (value = "confirmBuyItemId") Long confirmBuyItemId,
+                                           @PathVariable (value = "paymentItemId") Long paymentItemId) {
+        return paymentItemRepository.findByIdAndConfirmBuyItemId(paymentItemId, confirmBuyItemId).map(paymentItem -> {
+            paymentItemRepository.delete(paymentItem);
             return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException("Comment not found with id " + commentId + " and postId " + postId));
+        }).orElseThrow(() -> new ResourceNotFoundException("Comment not found with id " + paymentItemId + " and postId " + confirmBuyItemId));
     }
 
-     */
+
 }
