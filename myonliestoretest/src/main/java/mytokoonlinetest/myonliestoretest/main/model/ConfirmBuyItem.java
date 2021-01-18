@@ -8,7 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "confirmbuyitem")
-public class ConfirmBuyItem {
+public class ConfirmBuyItem extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
