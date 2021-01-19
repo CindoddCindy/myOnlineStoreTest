@@ -22,13 +22,13 @@ public class PaymentDoneController {
     @Autowired
     private PaymentItemRepository paymentItemRepository;
 
-    @GetMapping("/paymentitem/{paymentItemId}/paymentdone")
+    @GetMapping("/api/auth/paymentitem/{paymentItemId}/paymentdone")
     public Page<PaymentDone> getAllPaymentDoneByPaymentItemId(@PathVariable (value = "paymentItemId") Long paymentItemId,
                                                     Pageable pageable) {
         return paymentDoneRepository.findByPaymentItemId(paymentItemId, pageable);
     }
 
-    @PostMapping("/paymentitem/{paymentItemId}/paymentdone")
+    @PostMapping("/api/auth/paymentitem/{paymentItemId}/paymentdone")
     public PaymentDone createPaymentDone(@PathVariable (value = "paymentItemId") Long paymentItemId,
                                  @Valid @RequestBody PaymentDone paymentDone) {
         return paymentItemRepository.findById(paymentItemId).map(paymentItem -> {
@@ -37,7 +37,7 @@ public class PaymentDoneController {
         }).orElseThrow(() -> new ResourceNotFoundException("PaymentItemId " + paymentItemId + " not found"));
     }
 
-    @PutMapping("/paymentitem/{paymentItemId}/paymentdone/{paymentDoneId}")
+    @PutMapping("/api/auth/paymentitem/{paymentItemId}/paymentdone/{paymentDoneId}")
     public PaymentDone updatePaymentDone(@PathVariable (value = "paymentItemId") Long paymentItemId,
                                  @PathVariable (value = "paymentDoneId") Long paymentDoneId,
                                  @Valid @RequestBody PaymentDone paymentDoneRequest) {
@@ -54,7 +54,7 @@ public class PaymentDoneController {
         }).orElseThrow(() -> new ResourceNotFoundException("CommentId " + paymentDoneId + "not found"));
     }
 
-    @DeleteMapping("/paymentitem/{paymentItemId}/paymentdone/{paymentDoneId}")
+    @DeleteMapping("/api/auth/paymentitem/{paymentItemId}/paymentdone/{paymentDoneId}")
     public ResponseEntity<?> deletePaymentDone(@PathVariable (value = "paymentItemId") Long paymentItemId,
                                            @PathVariable (value = "paymentDoneId") Long paymentDoneId) {
         return paymentDoneRepository.findByIdAndPaymentItemId(paymentDoneId, paymentItemId).map(paymentDone -> {

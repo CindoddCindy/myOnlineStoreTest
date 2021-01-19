@@ -23,7 +23,7 @@ public class ItemController {
     @Autowired
     private UserDuaRepository userDuaRepository;
 
-    @GetMapping("/api/auth/user/{userId}/items")
+    @GetMapping("/api/auth/user/{userId}/item")
     public Page<Item> getAllItemsByUserId(@PathVariable (value = "userId") Long userId,
                                              Pageable pageable) {
         return itemRepository.findByUserId(userId, pageable);

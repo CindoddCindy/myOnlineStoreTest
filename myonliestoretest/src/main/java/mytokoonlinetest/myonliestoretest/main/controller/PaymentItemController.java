@@ -22,13 +22,13 @@ public class PaymentItemController {
     @Autowired
     private ConfirmByItemRepository confirmByItemRepository;
 
-    @GetMapping("/confirmbuyitem/{confirmBuyItemId}/paymentitem")
-    public Page<PaymentItem> getAllPaymentItemByConfirmId(@PathVariable (value = "confirmBuyItem") Long confirmBuyItemId,
+    @GetMapping("/api/auth/confirmbuyitem/{confirmBuyItemId}/paymentitem")
+    public Page<PaymentItem> getAllPaymentItemByConfirmId(@PathVariable (value = "confirmBuyItemId") Long confirmBuyItemId,
                                                     Pageable pageable) {
         return paymentItemRepository.findByConfirmBuyItemId(confirmBuyItemId, pageable);
     }
 
-    @PostMapping("/confirmbuyitem/{confirmBuyItemId}/paymentitem")
+    @PostMapping("/api/auth/confirmbuyitem/{confirmBuyItemId}/paymentitem")
     public PaymentItem createPamentItem(@PathVariable (value = "confirmBuyItemId") Long confirmBuyItemId,
                                  @Valid @RequestBody PaymentItem paymentItem) {
         return confirmByItemRepository.findById(confirmBuyItemId).map(confirmBuyItem -> {
@@ -38,7 +38,7 @@ public class PaymentItemController {
     }
 
 
-    @PutMapping("/confirmbuyitem/{confirmBuyItemId}/paymentitem/{paymentItemId}")
+    @PutMapping("/api/auth/confirmbuyitem/{confirmBuyItemId}/paymentitem/{paymentItemId}")
     public PaymentItem updatePaymentItem(@PathVariable (value = "confirmBuyItemId") Long confirmBuyItemId,
                                  @PathVariable (value = "paymentItemId") Long paymentItemId,
                                  @Valid @RequestBody PaymentItem paymentItemRequest) {
@@ -53,7 +53,7 @@ public class PaymentItemController {
         }).orElseThrow(() -> new ResourceNotFoundException("CommentId " + paymentItemId + "not found"));
     }
 
-    @DeleteMapping("/confirmbuyitem/{confirmBuyItemId}/paymentitem/{paymentItemId}")
+    @DeleteMapping("/api/auth/confirmbuyitem/{confirmBuyItemId}/paymentitem/{paymentItemId}")
     public ResponseEntity<?> deleteComment(@PathVariable (value = "confirmBuyItemId") Long confirmBuyItemId,
                                            @PathVariable (value = "paymentItemId") Long paymentItemId) {
         return paymentItemRepository.findByIdAndConfirmBuyItemId(paymentItemId, confirmBuyItemId).map(paymentItem -> {
